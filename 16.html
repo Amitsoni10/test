@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <input id="city" type="text">
+    <button id="btn" type="submit">Search</button>
+
+    <h1 id="temp"></h1>
+
+    <script>
+
+        const city = document.getElementById('city')
+        const btn = document.getElementById('btn')
+
+        const options = {
+            method: 'GET',
+            headers: {
+                'X-RapidAPI-Key': 'b0bb3c72f8msh62d549f120a8e7ap10c60cjsna5e0d8e672b9',
+                'X-RapidAPI-Host': 'weather-by-api-ninjas.p.rapidapi.com'
+            }
+        };
+
+        const getWeather =(city) => {
+        fetch(`https://weather-by-api-ninjas.p.rapidapi.com/v1/weather?city=${city}`, options)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                document.getElementById('temp').innerHTML = `Temp : ${data.temp} degree celcius`
+            })
+        }
+
+            btn.onclick = () => {
+                getWeather(city.value)
+            } 
+            
+            </script>
+</body>
+
+</html>
