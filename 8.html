@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+</head>
+<body>
+    <h1>DOM (Document Object Model) Manipulation</h1>
+
+    <div id="title">
+    <h2> Hello World </h2>
+    </div>
+    <div style="display: flex;">
+        <button class="colorSquare" id="red" style="height: 100px; width: 100px; background-color: red;" value="red"></button>
+        <button class="colorSquare" id="yellow" style="height: 100px; width: 100px; background-color: yellow;" value="yellow"></button>
+        <button class="colorSquare" id="green" style="height: 100px; width: 100px; background-color: green;" value="green"></button>
+    </div>
+    <button id="clear-game"> Clear Game</button>
+
+    <script>
+
+       let titleDiv = document.getElementById("title")
+       console.log("Before: ",titleDiv.innerText)
+
+       let message = 'Goodbye my lover!'
+       titleDiv.innerText = message;
+
+       console.log("After: ",titleDiv.innerText)
+
+       titleDiv.innerHTML = `<p>${message}</p>`
+       titleDiv.style.backgroundColor = 'yellow'
+       titleDiv.style.color = 'blue'
+
+       let redDiv = document.getElementById('red')
+       let yellowDiv = document.getElementById('yellow')
+       let greenDiv = document.getElementById('green')
+
+    //    redDiv.onclick = () => {
+    //     console.log("red")
+    //    }
+    //    yellowDiv.onclick =() => console.log("yellow")
+    //    greenDiv.onclick =() => console.log("green")
+
+       const squares = document.querySelectorAll('.colorSquare')
+    //    console.log(squares)
+
+    //    console.log(squares[0].value)
+    //    console.log(squares[1].value)
+    //    console.log(squares[2].value)
+
+       // forEach loop
+    //    squares.forEach(square => console.log(square.value))
+    const timesClicked = {'red':0, 'yellow':0, 'green':0}
+       squares.forEach(square => {
+           square.onclick = () => {
+               timesClicked[square.value] += 1
+               square.innerText = timesClicked[square.value]
+            // console.log(square.value)
+        }
+       })
+
+
+       function clearScores(){
+           timesClicked.red = 0
+           timesClicked.yellow = 0
+           timesClicked.green = 0
+           squares.forEach(square => square.innerText = '')
+        }
+        
+        const clearGameBtn = document.getElementById('clear-game')
+        clearGameBtn.onclick = () => clearScores()
+
+    </script>
+</body>
+</html>
